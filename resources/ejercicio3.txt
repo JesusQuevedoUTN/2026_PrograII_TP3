@@ -1,0 +1,2 @@
+Un texto de prueba.
+Una segunda línea con texto para la prueba.

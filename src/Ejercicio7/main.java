@@ -11,6 +11,18 @@ cada jugada hay que determinar si hay algún jugador ganador o hay empate.
 
 Opcional: Incluir en el programa la posibilidad de que el jugador pueda jugar 
 con la computadora.
+
+
+
+
+¿Qué te pide?: Programar el clásico juego del TaTeTi.Utilizar una matriz de 
+enteros de $3 \times 3$ inicializada en ceros desde el constructor.El jugador 1 
+marca con 1 y el jugador 2 con 5 (solo en casillas vacías).Evaluar tras cada 
+jugada si hay un ganador o empate.(Opcional extra): Agregar la lógica para que 
+un humano pueda jugar contra la computadora.El objetivo: Practicar la lógica de 
+matrices bidimensionales y validación de estados de juego (filas, columnas y 
+diagonales).¡Mandale mecha con el Ejercicio 1 cuando quieras, pasame tu código 
+o lo que vayas pensando, y lo vamos puliendo!
  */
 package Ejercicio7;
 
