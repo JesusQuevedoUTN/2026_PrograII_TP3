@@ -81,9 +81,33 @@ public class Reserva implements Serializable {
         return total;
     }
 
-    @Override
-    public String toString() {
-        return "Reserva{" + "id=" + id + ", cliente=" + cliente + ", autos=" + autos + ", fechaInicio=" + fechaInicio + ", fechaFinal=" + fechaFinal + ", entregado=" + entregado + '}';
+    public double calcularPrecioTotal() {
+        double total = 0;
+        for (Auto a : autos) {
+            total += a.getPrecioAlquiler(); // Asumiendo que Auto tiene getPrecioAlquiler()
+        }
+        return total;
     }
 
+    @Override
+    public String toString() {
+        //Hecho con gemini
+        StringBuilder sb = new StringBuilder();
+        sb.append("========================================\n");
+        sb.append(" RESERVA #").append(id).append("\n");
+        sb.append("========================================\n");
+        sb.append(" Cliente: ").append(cliente.getNombre()).append(" ").append(cliente.getApellido());
+        sb.append(" (DNI: ").append(cliente.getDni()).append(")\n");
+        sb.append(" Fechas: ").append(fechaInicio).append(" al ").append(fechaFinal).append("\n");
+        sb.append(" Estado: ").append(entregado ? "Entregado" : "Pendiente de entrega").append("\n");
+        sb.append(" Autos alquilados:\n");
+        for (Auto a : autos) {
+            sb.append("   - ").append(a.getMarca()).append(" ").append(a.getModelo());
+            sb.append(" [Matrícula: ").append(a.getMatricula()).append("] - $").append(a.getPrecioAlquiler()).append("\n");
+        }
+        sb.append("----------------------------------------\n");
+        sb.append(" PRECIO TOTAL: $").append(calcularPrecioTotal()).append("\n");
+        sb.append("========================================\n");
+        return sb.toString();
+    }
 }
