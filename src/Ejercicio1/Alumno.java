@@ -1,6 +1,5 @@
 package Ejercicio1;
 
-
 public class Alumno {
 
     private static int contadorId = 1;
@@ -33,7 +32,5 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "id=" + id + ", nombre=" + nombre + '}';
     }
-    
-    
-    
+
 }

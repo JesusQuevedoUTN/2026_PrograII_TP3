@@ -70,9 +70,9 @@ public class main {
 
             System.out.print("¿Cuál queres eliminar? \n INDICAR MEDIANTE EL ID: ");
             int idABuscar = teclado.nextInt();
-            
+
             if (idABuscar > 0 && idABuscar <= alumnos.size()) {
-                Alumno aBuscar = alumnos.get(idABuscar-1);
+                Alumno aBuscar = alumnos.get(idABuscar - 1);
                 int i = 0;
                 boolean encontrado = false;
                 while (i < alumnos.size() && !encontrado) {

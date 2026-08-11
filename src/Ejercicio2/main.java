@@ -16,7 +16,7 @@ public class main {
         //Esta es genérica lo que permite el uso seguro de listas como pilas y colas a las que usualmente
         //se reestringen ciertos datos, es mucho más pesada en consumo de RAM que el resto de colecciones
         //y puede ser vista en las funciones for-each
-        
+
         ArrayList<Alumno> listaRayada = new ArrayList();
         Alumno al1 = new Alumno("Jesus");
         Alumno al2 = new Alumno("Emanuel");
@@ -25,24 +25,24 @@ public class main {
         listaRayada.add(al1);
         listaRayada.add(al2);
         listaRayada.add(al3);
-        listaRayada.add(al4);        
-        
+        listaRayada.add(al4);
+
         Iterator<Alumno> it = listaRayada.iterator();
 
         System.out.println("\nMostrando con for-each");
         for (Alumno a : listaRayada) {
             System.out.println(a.toString());
         }
-        
+
         System.out.println("\nMostrando con while");
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Alumno a = it.next();
             System.out.println(a.toString());
         }
-        
+
         System.out.println("\nRemoviendo el final");
         it.remove();
-        
+
         for (Alumno a : listaRayada) {
             System.out.println(a.toString());
         }
