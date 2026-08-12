@@ -10,18 +10,15 @@ teléfono. Además dos clientes se diferencian por un código único.
  */
 public class Cliente implements Serializable {
 
-    private static int contadorId = 0;
-
     private int id;
-
     private String dni;
     private String nombre;
     private String apellido;
     private String direccion;
     private String telefono;
 
-    public Cliente(String dni, String nombre, String apellido, String direccion, String telefono) {
-        this.id = contadorId++;
+    public Cliente(int id, String dni, String nombre, String apellido, String direccion, String telefono) {
+        this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -77,4 +74,11 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
+    @Override
+    public String toString() {
+        return "ID/Código: " + this.id + " - Nombre: " + this.nombre + " " + this.apellido;
+    }
+
+    
+    
 }

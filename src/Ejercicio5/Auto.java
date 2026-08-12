@@ -72,4 +72,11 @@ public class Auto implements Serializable {
         this.precioAlquiler = precioAlquiler;
     }
 
+    @Override
+    public String toString() {
+        return "Matricula= " + matricula + ", Marca= " + marca + ", Modelo= " + modelo + ", Color= " + color + ", Plazas= " + plazas + ", Precio de alquiler= " + precioAlquiler + '}';
+    }
+
+    
+    
 }

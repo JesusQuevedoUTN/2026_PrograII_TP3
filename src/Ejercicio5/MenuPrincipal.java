@@ -15,11 +15,11 @@ import java.util.Scanner;
 public class MenuPrincipal {
 
     private Scanner teclado;
-    private GestorDeReserva gdr;
+    private Agencia gdr;
 
     public MenuPrincipal() {
         this.teclado = new Scanner(System.in);
-        this.gdr = new GestorDeReserva();
+        this.gdr = new Agencia();
     }
 
     public void menu() {
@@ -85,7 +85,7 @@ public class MenuPrincipal {
         System.out.print("Ingrese Teléfono: ");
         String telefono = teclado.nextLine();
 
-        Cliente nuevoCliente = new Cliente(dni, nombre, apellido, direccion, telefono);
+        Cliente nuevoCliente = new Cliente(gdr.obteneIdCliente(), dni, nombre, apellido, direccion, telefono);
         gdr.agregarCliente(nuevoCliente);
 
         System.out.println("¡Cliente registrado con éxito!");
@@ -113,64 +113,59 @@ public class MenuPrincipal {
     }
 
     private void registrarReserva() {
-        //HECHO CON GEMINI
-        
-        System.out.println("\n--- REGISTRAR NUEVA RESERVA ---");
-
         // 1. Mostrar y seleccionar Cliente
         System.out.println("\n--- CLIENTES DISPONIBLES ---");
         for (Cliente c : gdr.getClientes()) {
-            System.out.println("ID/Código: " + c.getId() + " - Nombre: " + c.getNombre() + " " + c.getApellido());
+            System.out.println(c.toString());;
         }
+        System.out.println("\n----------------------------");
 
         System.out.print("Ingrese ID del cliente: ");
         int idCliente = Integer.parseInt(teclado.nextLine());
         Cliente cliente = gdr.buscarClientePorId(idCliente);
-
         if (cliente == null) {
             System.out.println("Error: Cliente no encontrado.");
-            return;
-        }
 
-        // 2. Cargar Autos mediante bucle (1: Sí / 0: No)
-        ArrayList<Auto> autosElegidos = new ArrayList<>();
-        int continuar = 0;
+        } else {
+            ArrayList<Auto> autosElegidos = new ArrayList<>();
+            int seleccion = -1;
 
-        do {
-            System.out.println("\n--- AUTOS DISPONIBLES ---");
-            for (Auto a : gdr.getAutos()) {
-                System.out.println("Matrícula: " + a.getMatricula() + " - Marca: " + a.getMarca() + " - Modelo: " + a.getModelo());
+            do {
+                System.out.println("\n--- AUTOS DISPONIBLES ---");
+                for (Auto a : gdr.getAutos()) {
+                    System.out.println(a.toString());
+                }
+
+                System.out.print("Ingrese Matrícula del auto a reservar: ");
+                String matricula = teclado.nextLine();
+                Auto auto = gdr.buscarAutoPorMatricula(matricula);
+                
+                if (auto != null) {
+                    autosElegidos.add(auto);
+                    System.out.println("¡Auto agregado con éxito!");
+                } else {
+                    System.out.println("Error: Auto no encontrado.");
+                }
+                
+                System.out.print("¿Desea agregar otro auto a esta reserva? (1: Sí / 0: No): ");
+                seleccion = Integer.parseInt(teclado.nextLine());
+
+            } while (seleccion == 1);
+
+            // Validación por si no eligió ningún auto válido
+            if (autosElegidos.isEmpty()) {
+                System.out.println("No se seleccionó ningún auto. Cancelando reserva.");
+                return;
             }
 
-            System.out.print("Ingrese Matrícula del auto a reservar: ");
-            String matricula = teclado.nextLine();
-            Auto auto = gdr.buscarAutoPorMatricula(matricula);
+            Reserva nuevaReserva = new Reserva(gdr.obtenerIdReserva(), cliente, autosElegidos, new Date(), new Date());
 
-            if (auto != null) {
-                autosElegidos.add(auto);
-                System.out.println("¡Auto agregado con éxito!");
-            } else {
-                System.out.println("Error: Auto no encontrado.");
-            }
+            gdr.registrarReserva(nuevaReserva);
 
-            System.out.print("¿Desea agregar otro auto a esta reserva? (1: Sí / 0: No): ");
-            continuar = Integer.parseInt(teclado.nextLine());
+            System.out.println("\n¡Reserva creada con éxito con " + autosElegidos.size() + " auto(s)!");
 
-        } while (continuar == 1);
-
-        // Validación por si no eligió ningún auto válido
-        if (autosElegidos.isEmpty()) {
-            System.out.println("No se seleccionó ningún auto. Cancelando reserva.");
-            return;
         }
 
-        // 3. Crear y registrar la Reserva
-        int idReserva = gdr.obtenerSiguienteId();
-        Reserva nuevaReserva = new Reserva(idReserva, cliente, autosElegidos, new Date(), new Date());
-
-        gdr.registrarReserva(nuevaReserva);
-
-        System.out.println("\n¡Reserva creada con éxito con " + autosElegidos.size() + " auto(s)!");
     }
 
 }
