@@ -6,7 +6,7 @@ public class LibroTecnico extends Libro {
 
     private CategoriaTecnico area;
 
-    public LibroTecnico(String isbn, String titulo, ArrayList<String> autores, String editorial, int anioEdicion, String formato, int stock, CategoriaTecnico area) {
+    public LibroTecnico(String isbn, String titulo, ArrayList<String> autores, String editorial, int anioEdicion, TipoDeTapa formato, int stock, CategoriaTecnico area) {
         super(isbn, titulo, autores, editorial, anioEdicion, formato, stock);
         this.area = area;
     }
@@ -19,5 +19,4 @@ public class LibroTecnico extends Libro {
         this.area = area;
     }
 
-    
 }

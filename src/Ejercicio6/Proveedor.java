@@ -29,5 +29,4 @@ public class Proveedor implements Serializable {
         this.editoriales = editoriales;
     }
 
-    
 }

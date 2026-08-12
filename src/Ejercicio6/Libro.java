@@ -2,6 +2,7 @@ package Ejercicio6;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
 /*
 Cada libro tiene un título, uno o más autores, una editorial, un año de edición 
 y formato (tapas duras o edición económica). 
@@ -9,7 +10,7 @@ Los libros tienen además un código ISBN y capítulos, los que tratan una o má
 materias (en los técnicos) o es una simple división (en las novelas).
 De cada libro se tiene un stock (que puede ser cero). Al 
 venderse un libro, el stock se actualiza. 
-*/
+ */
 public abstract class Libro implements Serializable {
 
     private String isbn;
@@ -17,10 +18,10 @@ public abstract class Libro implements Serializable {
     private ArrayList<String> autores;
     private String editorial;
     private int anioEdicion;
-    private String formato;
+    private TipoDeTapa formato;
     private int stock;
 
-    public Libro(String isbn, String titulo, ArrayList<String> autores, String editorial, int anioEdicion, String formato, int stock) {
+    public Libro(String isbn, String titulo, ArrayList<String> autores, String editorial, int anioEdicion, TipoDeTapa formato, int stock) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autores = autores;
@@ -70,11 +71,11 @@ public abstract class Libro implements Serializable {
         this.anioEdicion = anioEdicion;
     }
 
-    public String getFormato() {
+    public TipoDeTapa getFormato() {
         return formato;
     }
 
-    public void setFormato(String formato) {
+    public void setFormato(TipoDeTapa formato) {
         this.formato = formato;
     }
 
@@ -86,8 +87,16 @@ public abstract class Libro implements Serializable {
         this.stock = stock;
     }
 
-    
+    public void vender() throws IllegalStateException {
+        if (this.stock <= 0) {
+            throw new IllegalStateException("Lo siento, no está disponible, haga un encargo.");
+        }
+        this.stock--;
+    }
 
-
-
+    public String toString() {
+        return "Título: " + titulo + " | ISBN: " + isbn + "\nAutores: " + autores
+                + "\nEditorial: " + editorial + " | Año: " + anioEdicion
+                + "\nFormato: " + formato + " | Stock: " + stock;
+    }
 }
