@@ -29,4 +29,8 @@ public class Proveedor implements Serializable {
         this.editoriales = editoriales;
     }
 
+    @Override
+    public String toString() {
+        return "Proveedor{" + "nombre=" + nombre + '}';
+    }
 }

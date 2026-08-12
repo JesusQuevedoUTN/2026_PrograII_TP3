@@ -23,6 +23,7 @@ public class MenuPrincipal {
     public void menu() {
         int opcion = -1;
         while (opcion != 0) {
+            limpiarPantalla();
             System.out.println("\n--- GESTION DE LIBRERIA ---");
             System.out.println("1. Registrar Libro");
             System.out.println("2. Registrar Proveedor");
@@ -64,7 +65,7 @@ public class MenuPrincipal {
                     break;
 
                 case 5:
-                    //realizarEncargo();
+                    realizarEncargo();
                     break;
 
                 case 6:
@@ -78,6 +79,7 @@ public class MenuPrincipal {
                 default:
                     System.out.println("Opcion invalida.");
             }
+            pausar();
         }
     }
 
@@ -136,7 +138,7 @@ public class MenuPrincipal {
             editoriales.add(titulo);
             System.out.print("Desea agregar otra editorial? 1. SI\t 0.NO ");
             seleccion = Integer.parseInt(sc.nextLine());
-        } while (seleccion == 0);
+        } while (seleccion == 1);
 
         Proveedor proveedor = new Proveedor(nombre, editoriales);
         libreria.agregarProveedor(proveedor);
@@ -182,8 +184,66 @@ public class MenuPrincipal {
     }
 
     private Libro buscarLibro() {
+        libreria.mostrarLibros();
         System.out.print("ISBN a buscar: ");
         String isbn = sc.nextLine();
         return libreria.buscarLibro(isbn);
     }
+
+    private void realizarEncargo() {
+        System.out.println("\n--- REALIZAR ENCARGO ---");
+
+        System.out.println("¿A quien quiere pedir el encargo?");
+        libreria.mostrarProovedores();
+        String proov = sc.nextLine();
+        Proveedor buscado = libreria.buscarProovedor(proov);
+        if (buscado == null) {
+            System.out.println("No existe");
+        } else {
+
+            Libro libro = buscarLibro();
+            if (libro == null) {
+                System.out.println("No existe ese libro");;
+            } else {
+                int cantidad = 0;
+                do {
+                    System.out.print("Ingrese cantidad de unidades a encargar: ");
+                    cantidad = sc.nextInt();
+
+                    if (cantidad < 1) {
+                        System.out.println("Cantidad inválida.");
+
+                    }
+                } while (cantidad < 1);
+
+                libro.comprar(cantidad);
+                libreria.guardarEnArchivo();
+                System.out.println("¡Encargo realizado a " + buscado.getNombre() + " con éxito! Nuevo stock: " + libro.getStock());
+
+            }
+        }
+
+    }
+
+    //Codigo hecho con GEMINI
+    private void limpiarPantalla() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
+        }
+    }
+
+    private void pausar() {
+        System.out.println("\nPresione ENTER para continuar...");
+        sc.nextLine();
+    }
+
 }

@@ -55,8 +55,10 @@ public class Libreria implements Serializable {
     }
 
     public void mostrarLibros() {
+        int i = 1;
         for (Libro l : libros) {
-            System.out.println(l.toString());
+            System.out.println("Libro " + i + "\n" + l.toString() + "\n");
+            i++;
         }
     }
 
@@ -72,6 +74,18 @@ public class Libreria implements Serializable {
         while (encontrado == null && i < libros.size()) {
             if (libros.get(i).getIsbn().equals(aBuscar)) {
                 encontrado = libros.get(i);
+            }
+            i++;
+        }
+        return encontrado;
+    }
+
+    public Proveedor buscarProovedor(String aBuscar) {
+        Proveedor encontrado = null;
+        int i = 0;
+        while (encontrado == null && i < proveedores.size()) {
+            if (proveedores.get(i).getNombre().equals(aBuscar)) {
+                encontrado = proveedores.get(i);
             }
             i++;
         }

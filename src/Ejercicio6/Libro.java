@@ -99,4 +99,8 @@ public abstract class Libro implements Serializable {
                 + "\nEditorial: " + editorial + " | Año: " + anioEdicion
                 + "\nFormato: " + formato + " | Stock: " + stock;
     }
+
+    void comprar(int cantidad) {
+        stock += cantidad;
+    }
 }

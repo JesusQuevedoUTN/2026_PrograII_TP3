@@ -139,14 +139,14 @@ public class MenuPrincipal {
                 System.out.print("Ingrese Matrícula del auto a reservar: ");
                 String matricula = teclado.nextLine();
                 Auto auto = gdr.buscarAutoPorMatricula(matricula);
-                
+
                 if (auto != null) {
                     autosElegidos.add(auto);
                     System.out.println("¡Auto agregado con éxito!");
                 } else {
                     System.out.println("Error: Auto no encontrado.");
                 }
-                
+
                 System.out.print("¿Desea agregar otro auto a esta reserva? (1: Sí / 0: No): ");
                 seleccion = Integer.parseInt(teclado.nextLine());
 

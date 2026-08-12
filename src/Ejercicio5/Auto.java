@@ -77,6 +77,4 @@ public class Auto implements Serializable {
         return "Matricula= " + matricula + ", Marca= " + marca + ", Modelo= " + modelo + ", Color= " + color + ", Plazas= " + plazas + ", Precio de alquiler= " + precioAlquiler + '}';
     }
 
-    
-    
 }

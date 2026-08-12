@@ -79,6 +79,4 @@ public class Cliente implements Serializable {
         return "ID/Código: " + this.id + " - Nombre: " + this.nombre + " " + this.apellido;
     }
 
-    
-    
 }

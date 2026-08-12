@@ -91,12 +91,12 @@ public class Reserva implements Serializable {
 
     @Override
     public String toString() {
-        return "RESERVA #" + id + "\n" 
-                + "Cliente: " + cliente.getNombre() + " " + cliente.getApellido() + "\tDNI: " + cliente.getDni() + "\n" 
-                + " Fechas: " + fechaInicio + " al " + fechaFinal + "\n" 
-                + " Estado: " + (entregado ? "Entregado" : "Pendiente de entrega") + "\n" 
+        return "RESERVA #" + id + "\n"
+                + "Cliente: " + cliente.getNombre() + " " + cliente.getApellido() + "\tDNI: " + cliente.getDni() + "\n"
+                + " Fechas: " + fechaInicio + " al " + fechaFinal + "\n"
+                + " Estado: " + (entregado ? "Entregado" : "Pendiente de entrega") + "\n"
                 + " Autos alquilados:\n" + autos.toString() + "\n"
                 + " PRECIO TOTAL: $" + calcularPrecioTotal() + "\n";
-        
+
     }
 }

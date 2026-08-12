@@ -100,7 +100,7 @@ public class MenuPrincipal {
         String origen = teclado.nextLine();
 
         int id = gda.obtenerSiguienteId();
-        
+
         Contacto nuevo = new Contacto(id, nombre, apellido, linea, movil, trabajo, email, origen);
         gda.registrarContacto(nuevo);
     }

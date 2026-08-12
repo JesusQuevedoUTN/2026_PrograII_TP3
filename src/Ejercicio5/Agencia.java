@@ -48,7 +48,7 @@ public class Agencia {
         }
         return reservas.get(reservas.size() - 1).getId() + 1;
     }
-    
+
     public int obteneIdCliente() {
         if (clientes.isEmpty()) {
             return 0;
